@@ -48,6 +48,14 @@ RUN useradd -m -u $PUID -g $PGID -o -s /bin/bash $UNAME
 # install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# forward private ssh key from host
+ARG SSH_KEY_NAME
+RUN mkdir ~/.ssh \
+    && ln -s /run/secrets/my_ssh_key ~/.ssh/$SSH_KEY_NAME
+
+# change user
+USER $UNAME
+
 EXPOSE 9000
 
 CMD ["php-fpm"]
