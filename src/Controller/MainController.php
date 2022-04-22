@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +13,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'start_page')]
     public function index(): Response
     {
-        return $this->render('main/index.html.twig');
+        return $this->render('start_page/start_page.html.twig');
     }
 
 

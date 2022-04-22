@@ -24,7 +24,8 @@
     "symfony/translation": "^6.0",
     "symfony/validator": "^6.0",
     "symfony/runtime": "^6.0",
-    "symfony/yaml": "^6.0"
+    "symfony/yaml": "^6.0",
+    "symfony/webpack-encore-bundle": "^1.14"
   },
   "config": {
     "preferred-install": "dist",
