@@ -1,0 +1,79 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.top-row-menu {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: 10%;
+    background-color: white;
+}
+
+.main-block {
+    width: 100%;
+}
+
+.top-row-menu-elements {
+    height: 20%;
+}
+
+.top-row-menu-logo {
+    align-items: center;
+}
+
+.top-row-menu-ref {
+    justify-content: space-between;
+    width: 50%;
+}
+
+.top-row-menu-links {
+    justify-content: space-evenly;
+}
+
+.top-row-menu-links, .top-row-menu-ref {
+    display: flex;
+    flex-direction: row;
+}
+
+.instruments-part {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #b3eab3;
+    height: 30%;
+    justify-content: center;
+}
+
+.instrument-options {
+    display: inline-block;
+    background-color: white;
+    margin: 5%;
+    padding: 3%;
+}
+
+.instruments-links {
+    color: #032d03;
+}
+
+.healthy-food-img {
+    display:inline-block;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+#start-page {
+    display: flex;
+    align-content: start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+
+
