@@ -18,7 +18,10 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     wget \
-    zsh
+    zsh \
+    locate \
+    npm \
+    nodejs
 
 RUN docker-php-ext-configure zip
 
@@ -47,6 +50,9 @@ RUN useradd -m -u $PUID -g $PGID -o -s /bin/bash $UNAME
 
 # install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+#install yarn
+RUN npm install --global yarn
 
 # forward private ssh key from host
 ARG SSH_KEY_NAME
