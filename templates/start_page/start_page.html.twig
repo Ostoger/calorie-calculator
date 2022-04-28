@@ -1,24 +1,11 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 {% block body %}
-<div id="start-page">
-    <div class="top-row-menu main-block">
-        <nav class="main-block">
-            <div class="top-row-menu-links main-block">
-                <a class="top-row-menu-logo" href="/" title="Healthy lifestyle">
-                    <span>logo</span>
-                </a>
-                <div class="top-row-menu-ref">
-                    <span>Diet</span>
-                    <span>Exercises</span>
-                    <span>Authorisation</span>
-                </div>
-            </div>
-        </nav>
-    </div>
+<div id="app">
+    {% include "start_page/header_menu.html.twig" %}
     <div class="instruments-part main-block">
         <ul class="instruments-block">
             <li class="instrument-options">
-                <a class="instruments-links" href="calories-calculator">Calorie calculator</a>
+                <a class="instruments-links" href="/calculator">Calorie calculator</a>
             </li>
             <li class="instrument-options">
                 <a class="instruments-links" href="calories-diary">Calorie diary</a>

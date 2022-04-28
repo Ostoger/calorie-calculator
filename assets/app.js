@@ -8,5 +8,11 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
+import { createApp } from "vue";
+import CalorieCalculator from './js/CalorieCalculator.vue';
+
+const calorieCalculator = createApp(CalorieCalculator);
+calorieCalculator.mount('#calorie-calculator');
+
 // start the Stimulus application
 //import './bootstrap';

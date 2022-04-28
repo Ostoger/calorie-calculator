@@ -54,6 +54,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #install yarn
 RUN npm install --global yarn
 
+RUN npm install -D vue-loader vue-template-compiler
+
 # forward private ssh key from host
 ARG SSH_KEY_NAME
 RUN mkdir ~/.ssh \
