@@ -18,6 +18,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "pinia": "^2.0.13",
         "vue": "^3.2.33"
     }
 }

@@ -9,9 +9,13 @@
 import './styles/app.css';
 
 import { createApp } from "vue";
-import CalorieCalculator from './js/CalorieCalculator.vue';
+import CalorieCalculator from './js/components/CalorieCalculator.vue';
+import {createPinia} from "pinia/dist/pinia";
+
+const pinia = createPinia();
 
 const calorieCalculator = createApp(CalorieCalculator);
+calorieCalculator.use(pinia);
 calorieCalculator.mount('#calorie-calculator');
 
 // start the Stimulus application
