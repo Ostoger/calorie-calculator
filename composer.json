@@ -46,7 +46,7 @@
   },
   "require-dev": {
     "symfony/dotenv": "^6.0",
-    "symfony/maker-bundle": "^1.36",
+    "symfony/maker-bundle": "^1.41",
     "doctrine/doctrine-fixtures-bundle": "^3.4",
     "symfony/stopwatch": "^6.0",
     "symfony/web-profiler-bundle": "^6.0"

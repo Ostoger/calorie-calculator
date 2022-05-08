@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     libpng-dev \
+    libpq-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     libonig-dev \
@@ -31,7 +32,8 @@ RUN docker-php-ext-install \
         pcntl \
         intl \
         zip \
-        opcache
+        opcache \
+        pdo_pgsql
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
