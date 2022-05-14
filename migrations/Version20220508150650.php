@@ -33,7 +33,15 @@ final class Version20220508150650 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-
+        $categories = [
+            ['name' => 'Fruits'],
+            ['name' => 'Vegetables'],
+            ['name' => 'Grains'],
+            ['name' => 'Protein Foods'],
+            ['name' => 'Dairy']
+        ];
+        foreach ($categories as $category) {
+            $this->addSql('DELETE FROM food_categories WHERE name = :name', $category);
+        }
     }
 }
