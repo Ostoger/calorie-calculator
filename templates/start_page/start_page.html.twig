@@ -3,9 +3,9 @@
 <div id="app">
     {% include "start_page/header_menu.html.twig" %}
     <div class="instruments-part main-block">
-        <ul class="instruments-block">
+        <ul>
             <li class="instrument-options">
-                <a class="instruments-links" href="/calculator">Calorie calculator</a>
+                <a class="instruments-links" href="{{ path('calorie_calculator_main') }}">Calorie calculator</a>
             </li>
             <li class="instrument-options">
                 <a class="instruments-links" href="calories-diary">Calorie diary</a>
