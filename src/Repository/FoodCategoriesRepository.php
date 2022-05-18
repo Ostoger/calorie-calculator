@@ -38,6 +38,7 @@ class FoodCategoriesRepository extends ServiceEntityRepository
     /**
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function remove(FoodCategories $entity, bool $flush = false): void
     {
@@ -45,6 +46,21 @@ class FoodCategoriesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function getAllFoodCategoriesNames(): array
+    {
+        $categories = $this->createQueryBuilder('fcr')
+            ->select('fcr.name')
+            ->orderBy('fcr.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+        $foodCategoriesList = [];
+        foreach ($categories as $category) {
+            $foodCategoriesList[] = $category['name'];
+        }
+
+        return $foodCategoriesList;
     }
 
 //    /**
