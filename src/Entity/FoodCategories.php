@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Repository\FoodCategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -25,7 +26,7 @@ class FoodCategories
     private string $name;
 
     #[OneToMany(mappedBy: 'food_category', targetEntity: CompositeFoods::class)]
-    private ArrayCollection $foods;
+    private Collection $foods;
 
     public function __construct()
     {
