@@ -10,7 +10,10 @@
             <CalculatorSearchBox></CalculatorSearchBox>
         </div>
         <div class="food-categories calculator-modules">
-            <FoodCategories></FoodCategories>
+            <FoodCategories
+                :food-categories="foodCategories"
+            >
+            </FoodCategories>
         </div>
     </div>
 </template>
@@ -23,15 +26,32 @@ import FoodCategories from "./FoodCategories";
 export default {
     name: "CalorieCalculator",
     components: {TotalCalories, CalculatorSearchBox, FoodCategories},
+    data: () => ({
+       foodCategories: []
+    }),
+    created() {
+       this.getFoodCategories();
+    },
     methods: {
         isFoodAdded() {
             return this.store.foodAddedCounter > 0;
+        },
+        async getFoodCategories() {
+            try {
+                const response = await fetch('/calorie-calculator/get-food-categories', {
+                    method: 'POST',
+                });
+                const result = await response.json();
+                this.foodCategories = result.data;
+            } catch (e) {
+                console.error(e);
+            }
         }
     },
 }
 </script>
 
-<style scoped>
+<style>
 .calculator-container {
     display: flex;
     width: 60%;
@@ -39,7 +59,7 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
     align-content: start;
-    background-color: #d9ead9;
+    background-color: #edf6ed;
 }
 
 .calculator-modules {
@@ -55,7 +75,7 @@ export default {
 }
 
 .calculator-search-box {
-    height: 10%;
+    height: 6%;
     margin-top: 5%;
 }
 </style>
