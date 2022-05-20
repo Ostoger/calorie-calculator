@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\CompositeFoods;
+use App\Entity\Foods;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CompositeFoods>
+ * @extends ServiceEntityRepository<Foods>
  *
- * @method CompositeFoods|null find($id, $lockMode = null, $lockVersion = null)
- * @method CompositeFoods|null findOneBy(array $criteria, array $orderBy = null)
- * @method CompositeFoods[]    findAll()
- * @method CompositeFoods[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Foods|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Foods|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Foods[]    findAll()
+ * @method Foods[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompositeFoodsRepository extends ServiceEntityRepository
+class FoodsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CompositeFoods::class);
+        parent::__construct($registry, Foods::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(CompositeFoods $entity, bool $flush = false): void
+    public function add(Foods $entity, bool $flush = false): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -41,7 +41,7 @@ class CompositeFoodsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(CompositeFoods $entity, bool $flush = false): void
+    public function remove(Foods $entity, bool $flush = false): void
     {
         $this->_em->remove($entity);
         if ($flush) {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\CompositeFoodsRepository;
+use App\Repository\FoodsRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -12,9 +12,9 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
-#[Entity(repositoryClass: CompositeFoodsRepository::class)]
-#[Table('composite_foods')]
-class CompositeFoods
+#[Entity(repositoryClass: FoodsRepository::class)]
+#[Table('foods')]
+class Foods
 {
     #[Id, Column, GeneratedValue]
     private int $id;

@@ -25,7 +25,7 @@ class FoodCategories
     #[Column(length: 255)]
     private string $name;
 
-    #[OneToMany(mappedBy: 'food_category', targetEntity: CompositeFoods::class)]
+    #[OneToMany(mappedBy: 'food_category', targetEntity: Foods::class)]
     private Collection $foods;
 
     public function __construct()
