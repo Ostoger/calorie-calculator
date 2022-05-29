@@ -71,9 +71,6 @@ export default {
     height: 5%;
 }
 
-.calculator-total {
-}
-
 .calculator-search-box {
     height: 6%;
     margin-top: 5%;

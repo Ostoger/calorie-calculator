@@ -5,7 +5,7 @@
             <div id="food-categories-block">
                 <ul class="food-categories-list">
                     <li id="food-categories-links" v-for="foodCategory in foodCategories">
-                        <a class="categories-links" href=""> {{ foodCategory }} </a>
+                        <a class="categories-links" href="#" v-on:click="getFoodsList(foodCategory)"> {{ foodCategory }} </a>
                     </li>
                 </ul>
             </div>
@@ -20,6 +20,30 @@ export default {
         foodCategories: {
             type: Array,
             required: true
+        }
+    },
+    methods: {
+        async getFoodsList(foodCategory) {
+            try {
+                const response = await fetch('/calorie-calculator/get-category-foods', {
+                    method: 'POST',
+                    headers: {
+                         'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                            'categoryName': foodCategory,
+                            'pageNumber': 1
+                        }
+                    ),
+                });
+
+                const result = await response.json();
+                console.log(result);
+
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 }
