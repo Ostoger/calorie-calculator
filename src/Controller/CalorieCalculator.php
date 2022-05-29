@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\CalorieCalculator\FoodCategoryList;
 use App\Entity\FoodCategories;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,5 +35,18 @@ class CalorieCalculator extends AbstractController
         $foodCategories = $foodCategoriesRepository->getAllFoodCategoriesNames();
 
         return new Response(json_encode(['data' => $foodCategories]));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    #[Route('/get-category-foods', name: 'get_category_foods', methods: ['POST'])]
+    public function getCategoryFoods(Request $request): Response
+    {
+        $parameters = json_decode($request->getContent(), true);
+        $foodCategoryList = new FoodCategoryList($this->em, $parameters['categoryName'], $parameters['pageNumber']);
+        $foodNamesList = $foodCategoryList->getFoodsForFoodCategory();
+
+        return new Response(json_encode(['data' => $foodNamesList]));
     }
 }
