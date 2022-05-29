@@ -8,10 +8,10 @@ enum FoodCategoriesEnum: string
 {
     case Grains = 'Grains';
     case Fruits = 'Fruits';
-    case ProteinFoods = 'Protein Foods';
+    case ProteinFoods = 'Protein foods';
     case Vegetables = 'Vegetables';
     case Dairy = 'Dairy';
-    case CompositeFoods = 'Composite Foods';
+    case CompositeFoods = 'Composite foods';
     case Pastry = 'Pastry';
 
 
