@@ -19,13 +19,13 @@ use Doctrine\ORM\Mapping\Table;
 class FoodCategories
 {
     #[Id]
-    #[Column(type: 'integer'), GeneratedValue]
+    #[Column(type: 'integer', ), GeneratedValue]
     private int $id;
 
     #[Column(length: 255)]
     private string $name;
 
-    #[OneToMany(mappedBy: 'food_category', targetEntity: Foods::class)]
+    #[OneToMany(mappedBy: 'foodCategoryId', targetEntity: Foods::class)]
     private Collection $foods;
 
     public function __construct()
@@ -36,7 +36,7 @@ class FoodCategories
     /**
      * @return ArrayCollection
      */
-    public function getFoods(): ArrayCollection
+    public function getFoods(): Collection
     {
         return $this->foods;
     }

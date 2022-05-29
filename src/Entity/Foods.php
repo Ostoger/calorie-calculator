@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
@@ -20,7 +21,8 @@ class Foods
     private int $id;
 
     #[ManyToOne(targetEntity: FoodCategories::class, inversedBy: 'foods')]
-    private $foodCategory;
+    #[JoinColumn(name: 'food_category_id', referencedColumnName: 'id', nullable: false)]
+    private int $foodCategoryId;
 
     #[Column(nullable: false)]
     private int $energy;
@@ -37,14 +39,12 @@ class Foods
     #[Column(length: 255)]
     private string $name;
 
+    #[Column(length: 255)]
+    private string $description;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
