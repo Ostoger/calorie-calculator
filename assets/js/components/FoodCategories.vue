@@ -14,6 +14,9 @@
 </template>
 
 <script>
+
+import controlApi from "../api/control";
+
 export default {
     name: "foodCategories",
     props: {
@@ -23,27 +26,16 @@ export default {
         }
     },
     methods: {
-        async getFoodsList(foodCategory) {
-            try {
-                const response = await fetch('/calorie-calculator/get-category-foods', {
-                    method: 'POST',
-                    headers: {
-                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                            'categoryName': foodCategory,
-                            'pageNumber': 1
-                        }
-                    ),
-                });
-
-                const result = await response.json();
-                console.log(result);
-
-            } catch (e) {
-                console.error(e);
-            }
+        getFoodsList(foodCategory) {
+            controlApi.postData(
+                '/calorie-calculator/get-category-foods',
+                {
+                    'categoryName': foodCategory,
+                    'pageNumber': 1
+                }).then(foodCategoryList => {
+                return foodCategoryList;
+            })
+                .catch(error => console.log(error));
         }
     }
 }

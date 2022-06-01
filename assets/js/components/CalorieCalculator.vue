@@ -22,6 +22,7 @@
 import TotalCalories from "./TotalCalories";
 import CalculatorSearchBox from "./CalculatorSearchBox";
 import FoodCategories from "./FoodCategories";
+import controlApi from "../api/control";
 
 export default {
     name: "CalorieCalculator",
@@ -36,17 +37,13 @@ export default {
         isFoodAdded() {
             return this.store.foodAddedCounter > 0;
         },
-        async getFoodCategories() {
-            try {
-                const response = await fetch('/calorie-calculator/get-food-categories', {
-                    method: 'POST',
-                });
-                const result = await response.json();
-                this.foodCategories = result.data;
-            } catch (e) {
-                console.error(e);
-            }
-        }
+        getFoodCategories() {
+            controlApi.postData('/calorie-calculator/get-food-categories')
+                .then(foodCategoriesList => {
+                    this.foodCategories = foodCategoriesList;
+                })
+                .catch(error => console.log(error));
+        },
     },
 }
 </script>

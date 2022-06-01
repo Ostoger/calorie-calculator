@@ -34,7 +34,7 @@ class CalorieCalculator extends AbstractController
         $foodCategoriesRepository = $this->em->getRepository(FoodCategories::class);
         $foodCategories = $foodCategoriesRepository->getAllFoodCategoriesNames();
 
-        return new Response(json_encode(['data' => $foodCategories]));
+        return new Response(json_encode($foodCategories));
     }
 
     /**
