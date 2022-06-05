@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum FoodCategoriesEnum: string
+enum FoodCategoriesEnum: int
 {
-    case Grains = 'Grains';
-    case Fruits = 'Fruits';
-    case ProteinFoods = 'Protein foods';
-    case Vegetables = 'Vegetables';
-    case Dairy = 'Dairy';
-    case CompositeFoods = 'Composite foods';
-    case Pastry = 'Pastry';
+    case Grains = 1;
+    case Fruits = 2;
+    case ProteinFoods = 3;
+    case Vegetables = 4;
+    case Dairy = 5;
+    case CompositeFoods = 6;
+    case Pastry = 7;
 
     public static function getFoodCategoryId(string $categoryName): int
     {
         return match($categoryName) {
-            self::Grains->value => 1,
-            self::Fruits->value => 2,
-            self::ProteinFoods->value => 3,
-            self::Vegetables->value => 4,
-            self::Dairy->value => 5,
-            self::CompositeFoods->value => 6,
-            self::Pastry->value => 7,
+            'Grains' => self::Grains->value,
+            'Fruits' => self::Fruits->value,
+            'Protein foods' => self::ProteinFoods->value,
+            'Vegetables' => self::Vegetables->value,
+            'Dairy' => self::Dairy->value,
+            'Composite foods' => self::CompositeFoods->value,
+            'Pastry' => self::Pastry->value,
             default => throw new \Exception("Unexpected category name: $categoryName"),
         };
     }
