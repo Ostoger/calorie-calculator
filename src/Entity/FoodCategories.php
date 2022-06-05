@@ -19,10 +19,10 @@ use Doctrine\ORM\Mapping\Table;
 class FoodCategories
 {
     #[Id]
-    #[Column(type: 'integer', ), GeneratedValue]
+    #[Column(type: 'integer'), GeneratedValue]
     private int $id;
 
-    #[Column(length: 255)]
+    #[Column(type: 'string')]
     private string $name;
 
     #[OneToMany(mappedBy: 'foodCategoryId', targetEntity: Foods::class)]
