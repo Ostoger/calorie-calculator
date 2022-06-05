@@ -14,7 +14,6 @@ enum FoodCategoriesEnum: string
     case CompositeFoods = 'Composite foods';
     case Pastry = 'Pastry';
 
-
     public static function getFoodCategoryId(string $categoryName): int
     {
         return match($categoryName) {
