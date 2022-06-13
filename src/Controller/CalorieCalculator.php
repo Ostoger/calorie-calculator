@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route("/calorie-calculator")]
 class CalorieCalculator extends AbstractController
@@ -41,9 +42,27 @@ class CalorieCalculator extends AbstractController
      * @throws \Exception
      */
     #[Route('/get-category-foods', name: 'get_category_foods', methods: ['POST'])]
-    public function getCategoryFoods(Request $request): Response
+    public function getCategoryFoods(Request $request, ValidatorInterface $validator): Response
     {
         $parameters = json_decode($request->getContent(), true);
+
+//        $categoryName = $request->request->get('categoryName');
+//        $pageNumber = $request->request->get('pageNumber');
+
+
+
+        $input = [
+            'categoryName' => isset($parameters['categoryName']) ?? null,
+            'pageNumber' => $parameters['pageNumber']
+        ];
+
+        $foodCategory = new FoodCategories();
+        //$foodCategory->setName($parameters['categoryName']);
+        $violations = $validator->validate($foodCategory);
+
+        return new Response(json_encode(['data' => $violations]));
+        exit;
+
         $foodCategoryList = new FoodCategoryList($this->em, $parameters['categoryName'], $parameters['pageNumber']);
         $foodNamesList = $foodCategoryList->getFoodsForFoodCategory();
 

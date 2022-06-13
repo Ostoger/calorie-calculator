@@ -33,14 +33,23 @@ class FoodCategoryList
     /**
      * @throws \Exception
      */
-    public function getFoodsForFoodCategory(): Array
+    public function getFoodsForFoodCategory(): array
+    {
+        $notFormattedFoods = $this->getNotFormattedFoodsForFoodCategory();
+        return $this->formatteCategoryFoods($notFormattedFoods);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function getNotFormattedFoodsForFoodCategory(): array
     {
         $offset = self::LIST_SIZE * ($this->pageNumber - 1);
         $foodsRepository = $this->em->getRepository(Foods::class);
         $categoryId = FoodCategoriesEnum::getFoodCategoryId($this->categoryName);
 
         return $foodsRepository->createQueryBuilder('f')
-            ->select('f.name')
+            ->select('f.name, f.energy, f.protein, f.fat, f.carbohydrate, f.description')
             ->leftJoin(FoodCategories::class, 'fc',Join::WITH, 'fc.id = f.foodCategoryId')
             ->where('fc.id = :id')
             ->setParameter('id', $categoryId)
@@ -50,5 +59,20 @@ class FoodCategoryList
             ->getResult();
     }
 
-
+    /**
+     * @throws \Exception
+     */
+    private function formatteCategoryFoods(array $foods): array
+    {
+        return array_map(static fn($food): array => [
+            'name' => $food['name'],
+            'description' => $food['description'],
+            'additional' => [
+                'energy' => $food['energy'],
+                'protein' => $food['protein'],
+                'fat' => $food['fat'],
+                'carbohydrate' => $food['carbohydrate']
+            ]
+        ], $foods);
+    }
 }

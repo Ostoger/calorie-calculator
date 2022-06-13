@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\FoodCategoriesRepository;
+use App\Validator\FoodCategoryName;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -22,6 +24,8 @@ class FoodCategories
     #[Column(type: 'integer'), GeneratedValue]
     private int $id;
 
+    #[Assert\NotBlank]
+    #[FoodCategoryName]
     #[Column(type: 'string')]
     private string $name;
 

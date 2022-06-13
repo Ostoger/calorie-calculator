@@ -27,4 +27,9 @@ enum FoodCategoriesEnum: int
             default => throw new \Exception("Unexpected category name: $categoryName"),
         };
     }
+
+    public static function getAllFoodCategoryNames(): array
+    {
+        return ['Grains', 'Fruits', 'Protein foods', 'Vegetables', 'Dairy', 'Composite foods', 'Pastry'];
+    }
 }

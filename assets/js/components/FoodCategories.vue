@@ -5,7 +5,7 @@
             <div id="food-categories-block">
                 <ul class="food-categories-list">
                     <li id="food-categories-links" v-for="foodCategory in foodCategories">
-                        <a class="categories-links" href="#" v-on:click="getFoodsList(foodCategory)"> {{ foodCategory }} </a>
+                        <a class="categories-links" href="#" @click="getFoodsList(foodCategory)"> {{ foodCategory }} </a>
                     </li>
                 </ul>
             </div>
@@ -30,10 +30,11 @@ export default {
             controlApi.postData(
                 '/calorie-calculator/get-category-foods',
                 {
-                    'categoryName': foodCategory,
+                    'categoryName': 'foo',
                     'pageNumber': 1
                 }).then(foodCategoryList => {
-                return foodCategoryList;
+                    console.log(foodCategoryList);
+                this.$emit('selectableFoods', foodCategoryList)
             })
                 .catch(error => console.log(error));
         }

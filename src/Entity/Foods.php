@@ -25,16 +25,16 @@ class Foods
     private int $foodCategoryId;
 
     #[Column(nullable: false)]
-    private int $energy;
+    private float $energy;
 
     #[Column(nullable: false)]
-    private int $protein;
+    private float $protein;
 
     #[Column(nullable: false)]
-    private int $fat;
+    private float $fat;
 
     #[Column(nullable: false)]
-    private int $carbohydrate;
+    private float $carbohydrate;
 
     #[Column(length: 255)]
     private string $name;
