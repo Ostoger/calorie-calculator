@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y \
     npm \
     nodejs
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 RUN docker-php-ext-configure zip
 
 RUN docker-php-ext-install \
@@ -65,7 +68,5 @@ RUN mkdir ~/.ssh \
 
 # change user
 USER $UNAME
-
-EXPOSE 9000
 
 CMD ["php-fpm"]
