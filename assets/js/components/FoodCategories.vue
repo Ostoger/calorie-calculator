@@ -30,10 +30,9 @@ export default {
             controlApi.postData(
                 '/calorie-calculator/get-category-foods',
                 {
-                    'categoryName': 'foo',
+                    'categoryName': foodCategory,
                     'pageNumber': 1
                 }).then(foodCategoryList => {
-                    console.log(foodCategoryList);
                 this.$emit('selectableFoods', foodCategoryList)
             })
                 .catch(error => console.log(error));

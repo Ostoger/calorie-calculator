@@ -6,8 +6,10 @@ namespace App\Controller;
 
 use App\CalorieCalculator\FoodCategoryList;
 use App\Entity\FoodCategories;
+use App\Validator\FoodCategoryName;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,24 +48,25 @@ class CalorieCalculator extends AbstractController
     {
         $parameters = json_decode($request->getContent(), true);
 
-//        $categoryName = $request->request->get('categoryName');
-//        $pageNumber = $request->request->get('pageNumber');
-
-
+        $categoryName = $parameters['categoryName'] ?? null;
+        $pageNumber = $parameters['pageNumber'];
 
         $input = [
-            'categoryName' => isset($parameters['categoryName']) ?? null,
-            'pageNumber' => $parameters['pageNumber']
+            'categoryName' => $categoryName,
+            'pageNumber' => $pageNumber
         ];
 
-        $foodCategory = new FoodCategories();
-        //$foodCategory->setName($parameters['categoryName']);
-        $violations = $validator->validate($foodCategory);
+        $constraint = new Assert\Collection([
+            'categoryName' => [new FoodCategoryName(), new Assert\Optional()],
+            'pageNumber' => [new Assert\Type('integer'), new Assert\NotBlank],
+        ]);
 
-        return new Response(json_encode(['data' => $violations]));
-        exit;
+        $violations = $validator->validate($input, $constraint);
+        if (count($violations) > 0) {
+            return new Response(json_encode(['data' => $violations]), Response::HTTP_BAD_REQUEST);
+        }
 
-        $foodCategoryList = new FoodCategoryList($this->em, $parameters['categoryName'], $parameters['pageNumber']);
+        $foodCategoryList = new FoodCategoryList($this->em, $categoryName, $pageNumber);
         $foodNamesList = $foodCategoryList->getFoodsForFoodCategory();
 
         return new Response(json_encode(['data' => $foodNamesList]));
