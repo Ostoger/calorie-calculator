@@ -27,10 +27,6 @@ class FoodCategoriesRepository extends ServiceEntityRepository
         parent::__construct($registry, FoodCategories::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function add(FoodCategories $entity, bool $flush = false): void
     {
         $this->_em->persist($entity);
@@ -39,11 +35,6 @@ class FoodCategoriesRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \Doctrine\ORM\ORMException
-     */
     public function remove(FoodCategories $entity, bool $flush = false): void
     {
         $this->_em->remove($entity);
@@ -52,9 +43,6 @@ class FoodCategoriesRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws \ErrorException
-     */
     public function getAllFoodCategoriesNames(CacheInterface $cache): array
     {
         return $cache->get('cache.all_food_categories', function (ItemInterface $item) {
