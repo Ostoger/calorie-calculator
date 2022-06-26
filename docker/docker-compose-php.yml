@@ -54,6 +54,11 @@ services:
       - ../nginx/local.conf:/etc/nginx/conf.d/default.conf
       - ${PROJECT_DIR}:/app
 
+  memcached:
+    image: memcached:1.6
+    ports:
+      - "11211:11211"
+
 secrets:
   my_ssh_key:
     file: ~/.ssh/${SSH_KEY_NAME:-id_rsa}

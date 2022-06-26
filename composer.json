@@ -20,12 +20,15 @@
     "symfony/monolog-bundle": "^3.7",
     "symfony/mailer": "^6.0",
     "symfony/form": "^6.0",
-    "symfony/security-bundle": "^6.0",
+    "symfony/security-bundle": "^6.1",
     "symfony/translation": "^6.0",
     "symfony/validator": "^6.1",
     "symfony/runtime": "^6.0",
     "symfony/yaml": "^6.0",
-    "symfony/webpack-encore-bundle": "^1.14"
+    "symfony/webpack-encore-bundle": "^1.14",
+    "symfony/cache": "^6.1",
+    "symfony/var-dumper": "^6.1",
+    "symfony/config": "^6.1"
   },
   "config": {
     "preferred-install": "dist",

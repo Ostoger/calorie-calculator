@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * @extends ServiceEntityRepository<FoodCategories>
@@ -18,6 +20,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class FoodCategoriesRepository extends ServiceEntityRepository
 {
+    private const CACHE_KEY = 'categories_list';
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, FoodCategories::class);
@@ -48,19 +52,24 @@ class FoodCategoriesRepository extends ServiceEntityRepository
         }
     }
 
-    public function getAllFoodCategoriesNames(): array
+    /**
+     * @throws \ErrorException
+     */
+    public function getAllFoodCategoriesNames(CacheInterface $cache): array
     {
-        $categories = $this->createQueryBuilder('fcr')
-            ->select('fcr.name')
-            ->orderBy('fcr.id', 'ASC')
-            ->getQuery()
-            ->getResult();
-        $foodCategoriesList = [];
-        foreach ($categories as $category) {
-            $foodCategoriesList[] = $category['name'];
-        }
+        return $cache->get('cache.all_food_categories', function (ItemInterface $item) {
+            $categories = $this->createQueryBuilder('fcr')
+                ->select('fcr.name')
+                ->orderBy('fcr.id', 'ASC')
+                ->getQuery()
+                ->getResult();
+            $foodCategoriesList = [];
+            foreach ($categories as $category) {
+                $foodCategoriesList[] = $category['name'];
+            }
 
-        return $foodCategoriesList;
+            return $foodCategoriesList;
+        });
     }
 
 //    /**

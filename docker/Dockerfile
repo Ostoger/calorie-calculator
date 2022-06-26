@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
     npm \
     nodejs
 
+RUN apt-get update && apt-get install -y libmemcached-dev zlib1g-dev \
+    && pecl install memcached-3.2.0 \
+    && docker-php-ext-enable memcached
+
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 

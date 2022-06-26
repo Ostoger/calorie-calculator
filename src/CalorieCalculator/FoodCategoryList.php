@@ -9,6 +9,7 @@ use App\Entity\Foods;
 use App\Enums\FoodCategoriesEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 
 class FoodCategoryList
 {
@@ -36,7 +37,7 @@ class FoodCategoryList
     public function getFoodsForFoodCategory(): array
     {
         $notFormattedFoods = $this->getNotFormattedFoodsForFoodCategory();
-        return $this->formatteCategoryFoods($notFormattedFoods);
+        return $this->getformattedCategoryFoods($notFormattedFoods);
     }
 
     /**
@@ -62,7 +63,7 @@ class FoodCategoryList
     /**
      * @throws \Exception
      */
-    private function formatteCategoryFoods(array $foods): array
+    private function getformattedCategoryFoods(array $foods): array
     {
         return array_map(static fn($food): array => [
             'name' => $food['name'],

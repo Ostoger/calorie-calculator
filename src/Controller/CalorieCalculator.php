@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 #[Route("/calorie-calculator")]
 class CalorieCalculator extends AbstractController
@@ -32,10 +33,10 @@ class CalorieCalculator extends AbstractController
     }
 
     #[Route('/get-food-categories', methods: ['POST'])]
-    public function getCategories(): Response
+    public function getCategories(CacheInterface $cache): Response
     {
         $foodCategoriesRepository = $this->em->getRepository(FoodCategories::class);
-        $foodCategories = $foodCategoriesRepository->getAllFoodCategoriesNames();
+        $foodCategories = $foodCategoriesRepository->getAllFoodCategoriesNames($cache);
 
         return new Response(json_encode($foodCategories));
     }

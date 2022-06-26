@@ -1,5 +1,12 @@
 framework:
     cache:
+        # service: cache.memcached
+        default_memcached_provider: 'memcached://memcached:11211'
+        pools:
+            cache.all_food_categories:
+                adapter: cache.adapter.memcached
+                public: true
+
         # Unique name of your app: used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
 
